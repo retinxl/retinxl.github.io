@@ -12,9 +12,9 @@ Welcome to my portfolio! I'm passionate about books, coding, and creative projec
 Check out my YouTube channel where I discuss and review books I'm reading:
 - [Bookish Bianca on YouTube](https://www.youtube.com/@bookishbianca)
 
-### Book Analysis Presentations
+### Book Analysis PowerPoints
 PowerPoint presentations breaking down my current reads
-- [View Presentation]([https://docs.google.com/presentation/d/1jpSvOfVoWpLbAjNujQTLZYhnplSz_cUd-iSpImrEs5g/edit?usp=sharing](https://drive.google.com/drive/u/0/folders/1RoF_4uCg-u98TCPm28STCvubf00vDWID))
+- [View Presentations](https://drive.google.com/drive/folders/1RoF_4uCg-u98TCPm28STCvubf00vDWID?usp=sharing)
 
 ## 🔗 Connect With Me
 - [LinkedIn](https://www.linkedin.com/in/bianca-bacchus/)
