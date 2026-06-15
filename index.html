@@ -18,528 +18,193 @@
     --gold: #8B6F47;
     --gold-light: #B8956A;
     --rule: #C8C1B5;
-    --white: #FDFCFA;
   }
 
   html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: var(--parchment); color: var(--ink); overflow-x: hidden; }
 
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--parchment);
-    color: var(--ink);
-    overflow-x: hidden;
-  }
-
-  /* ── NAV ── */
+  /* NAV */
   nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
     padding: 1.2rem 3rem;
     background: var(--parchment);
     border-bottom: 1px solid transparent;
     transition: border-color 0.3s, background 0.3s;
   }
   nav.scrolled { border-color: var(--rule); background: rgba(232,227,217,0.97); backdrop-filter: blur(4px); }
-  .nav-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.05rem;
-    font-weight: 400;
-    letter-spacing: 0.04em;
-    color: var(--ink);
-    text-decoration: none;
-  }
-  .nav-links {
-    display: flex;
-    gap: 2.5rem;
-    list-style: none;
-  }
-  .nav-links a {
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-mid);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 400; letter-spacing: 0.04em; color: var(--ink); text-decoration: none; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mid); text-decoration: none; transition: color 0.2s; }
   .nav-links a:hover { color: var(--gold); }
 
-  /* ── HERO ── */
+  /* HERO */
   .hero {
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    padding: 7rem 2rem 5rem;
-    background: var(--parchment);
+    position: relative; min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    overflow: hidden; padding: 7rem 2rem 5rem; background: var(--parchment);
   }
 
+  /* KEY FIX: CSS grid with portrait in the middle column */
   .hero-name {
-    position: relative;
-    z-index: 2;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    justify-content: center;
-    gap: 0;
     width: 100%;
-    max-width: 1200px;
-    overflow: hidden;
+    max-width: 1100px;
   }
   .hero-first, .hero-last {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(3rem, 6vw, 6.5rem);
-    font-weight: 900;
-    line-height: 0.95;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    user-select: none;
+    font-size: clamp(2.8rem, 5.5vw, 6rem);
+    font-weight: 900; line-height: 0.95; letter-spacing: -0.02em; color: var(--ink); user-select: none;
   }
-  .hero-first { text-align: right; flex: 1; padding-right: 1.5rem; }
-  .hero-last { text-align: left; flex: 1; padding-left: 1.5rem; }
+  .hero-first { text-align: right; padding-right: 2rem; }
+  .hero-last  { text-align: left;  padding-left: 2rem; }
 
   .hero-portrait {
-    position: relative;
-    z-index: 3;
-    width: clamp(160px, 18vw, 260px);
+    width: clamp(160px, 17vw, 250px);
     aspect-ratio: 3/4;
-    flex-shrink: 0;
     overflow: hidden;
     background: var(--ink-mid);
+    flex-shrink: 0;
   }
-  .hero-portrait svg {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-  .portrait-placeholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(160deg, #2e2925 0%, #1a1612 100%);
-    color: var(--rule);
-    text-align: center;
-    padding: 2rem;
-    gap: 1rem;
-  }
-  .portrait-icon { font-size: 3.5rem; opacity: 0.4; }
-  .portrait-label {
-    font-family: 'EB Garamond', serif;
-    font-style: italic;
-    font-size: 0.85rem;
-    opacity: 0.5;
-    line-height: 1.5;
-  }
+  .hero-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
 
-  .hero-tagline {
-    position: relative;
-    z-index: 2;
-    margin-top: 3rem;
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    color: var(--ink-mid);
-  }
+  .hero-tagline { position: relative; z-index: 2; margin-top: 3rem; display: flex; align-items: center; gap: 2rem; }
   .hero-rule { height: 1px; width: 60px; background: var(--gold); }
-  .hero-tagline-text {
-    font-family: 'EB Garamond', serif;
-    font-style: italic;
-    font-size: 1.15rem;
-    letter-spacing: 0.02em;
-    color: var(--gold);
-  }
+  .hero-tagline-text { font-family: 'EB Garamond', serif; font-style: italic; font-size: 1.15rem; letter-spacing: 0.02em; color: var(--gold); }
 
   .hero-scroll {
-    position: absolute;
-    bottom: 2.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--rule);
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: var(--rule);
     animation: bob 2.5s ease-in-out infinite;
   }
   .hero-scroll span { font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; }
   @keyframes bob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
 
-  /* decorative leaf */
-  .deco-leaf {
-    position: absolute;
-    right: 8%;
-    bottom: 20%;
-    opacity: 0.07;
-    pointer-events: none;
-  }
+  .deco-leaf { position: absolute; right: 8%; bottom: 20%; opacity: 0.07; pointer-events: none; }
 
-  /* ── SECTION LABEL ── */
-  .section-label {
-    font-size: 0.65rem;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--gold);
-    text-align: center;
-    display: block;
-    margin-bottom: 0.75rem;
-  }
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 700;
-    text-align: center;
-    color: var(--ink);
-    letter-spacing: 0.01em;
-    line-height: 1.15;
-  }
-  .section-divider {
-    width: 36px;
-    height: 1px;
-    background: var(--ink);
-    margin: 1.5rem auto 0;
-    opacity: 0.25;
-  }
+  /* SECTION SHARED */
+  .section-label { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); text-align: center; display: block; margin-bottom: 0.75rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; text-align: center; color: var(--ink); letter-spacing: 0.01em; line-height: 1.15; }
+  .section-divider { width: 36px; height: 1px; background: var(--ink); margin: 1.5rem auto 0; opacity: 0.25; }
 
-  /* ── WRITING ── */
-  .writing {
-    background: var(--ink);
-    padding: 6rem 2rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .writing .section-label { color: var(--gold-light); }
-  .writing .section-title { color: var(--parchment-light); }
-  .writing .section-divider { background: var(--parchment-light); opacity: 0.15; }
-
-  .writing-deco {
-    position: absolute;
-    left: 5%;
-    top: 50%;
-    transform: translateY(-50%);
-    opacity: 0.04;
-    pointer-events: none;
-  }
-
-  .writing-feature {
-    max-width: 820px;
-    margin: 4rem auto 0;
-    display: grid;
-    grid-template-columns: 1fr 1.6fr;
-    gap: 4rem;
-    align-items: center;
-  }
-  .writing-book {
-    aspect-ratio: 2/3;
-    background: linear-gradient(160deg, #2e2925 0%, #1a1612 100%);
-    border: 1px solid rgba(200,193,181,0.12);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2.5rem 2rem;
-    gap: 1.5rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .writing-book::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 6px;
-    background: linear-gradient(180deg, var(--gold) 0%, var(--gold-light) 100%);
-  }
-  .writing-book-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    font-weight: 700;
-    font-style: italic;
-    color: var(--parchment-light);
-    text-align: center;
-    line-height: 1.3;
-    letter-spacing: 0.01em;
-  }
-  .writing-book-ornament {
-    color: var(--gold);
-    font-size: 1.4rem;
-    letter-spacing: 0.3em;
-  }
-  .writing-award-badge {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.3rem;
-    border: 1px solid rgba(139,111,71,0.5);
-    padding: 0.7rem 1.2rem;
-    text-align: center;
-  }
-  .badge-top {
-    font-size: 0.55rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold-light);
-  }
-  .badge-award {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: var(--gold-light);
-    letter-spacing: 0.04em;
-  }
-
-  .writing-content { display: flex; flex-direction: column; gap: 1.5rem; }
-  .writing-genre {
-    font-size: 0.62rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold-light);
-  }
-  .writing-piece-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-    font-weight: 700;
-    font-style: italic;
-    color: var(--parchment-light);
-    line-height: 1.1;
-  }
-  .writing-excerpt {
-    font-family: 'EB Garamond', serif;
-    font-size: 1.15rem;
-    line-height: 1.8;
-    color: rgba(245,242,236,0.65);
-  }
-  .writing-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--parchment-light);
-    text-decoration: none;
-    border-bottom: 1px solid var(--gold);
-    padding-bottom: 0.3rem;
-    width: fit-content;
-    transition: color 0.2s, border-color 0.2s;
-  }
-  .writing-cta:hover { color: var(--gold-light); border-color: var(--gold-light); }
-
-  @media (max-width: 768px) {
-    .writing-feature { grid-template-columns: 1fr; gap: 2.5rem; }
-    .writing-book { aspect-ratio: 3/2; }
-  }
-
-  /* ── ABOUT ── */
-  .about {
-    background: var(--parchment-light);
-    padding: 6rem 2rem;
-  }
-  .about-inner {
-    max-width: 680px;
-    margin: 0 auto;
-    text-align: center;
-  }
-  .about-bio {
-    margin-top: 2.5rem;
-    font-family: 'EB Garamond', serif;
-    font-size: 1.3rem;
-    line-height: 1.75;
-    color: var(--ink-mid);
-  }
+  /* ABOUT */
+  .about { background: var(--parchment-light); padding: 6rem 2rem; }
+  .about-inner { max-width: 680px; margin: 0 auto; text-align: center; }
+  .about-bio { margin-top: 2.5rem; font-family: 'EB Garamond', serif; font-size: 1.3rem; line-height: 1.75; color: var(--ink-mid); }
   .about-bio em { font-style: italic; color: var(--gold); }
-  .about-tags {
-    margin-top: 2rem;
-    display: flex;
-    gap: 0.75rem;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  .tag {
-    font-size: 0.65rem;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    border: 1px solid var(--rule);
-    padding: 0.4rem 1rem;
-    color: var(--ink-mid);
-  }
+  .about-tags { margin-top: 2rem; display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+  .tag { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; border: 1px solid var(--rule); padding: 0.4rem 1rem; color: var(--ink-mid); }
 
-  /* ── PROJECTS ── */
-  .projects {
-    padding: 6rem 2rem;
-    background: var(--parchment);
-  }
+  /* PROJECTS */
+  .projects { padding: 6rem 2rem; background: var(--parchment); }
   .projects-grid {
-    max-width: 1040px;
-    margin: 3.5rem auto 0;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-    border-top: 1px solid var(--rule);
-    border-left: 1px solid var(--rule);
+    max-width: 1040px; margin: 3.5rem auto 0;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--rule); border-left: 1px solid var(--rule);
   }
   .project-card {
-    border-right: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
-    padding: 2.5rem 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    transition: background 0.2s;
-    text-decoration: none;
-    color: inherit;
+    border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+    padding: 0 0 2rem 0;
+    display: flex; flex-direction: column; gap: 0;
+    transition: background 0.2s; text-decoration: none; color: inherit;
   }
   .project-card:hover { background: var(--parchment-light); }
   .project-thumb {
-    aspect-ratio: 16/9;
-    overflow: hidden;
-    background: var(--ink);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.5rem;
-    margin-bottom: 0.25rem;
+    aspect-ratio: 16/9; overflow: hidden; width: 100%; margin-bottom: 1.5rem;
   }
-  .project-meta {
-    font-size: 0.62rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-  .project-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.05rem;
-    font-weight: 700;
-    line-height: 1.3;
-    color: var(--ink);
-    text-transform: capitalize;
-  }
-  .project-desc {
-    font-size: 0.8rem;
-    line-height: 1.65;
-    color: var(--ink-mid);
-    flex: 1;
-  }
-  .project-link-row {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink);
-    margin-top: 0.5rem;
-  }
-  .project-link-row .arrow { font-size: 0.8rem; transition: transform 0.2s; }
+  .project-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
+  .project-card:hover .project-thumb img { transform: scale(1.04); }
+  .project-card-body { padding: 0 1.75rem; display: flex; flex-direction: column; gap: 0.75rem; flex: 1; }
+  .project-meta { font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); }
+  .project-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; line-height: 1.3; color: var(--ink); }
+  .project-desc { font-size: 0.8rem; line-height: 1.65; color: var(--ink-mid); flex: 1; }
+  .project-link-row { display: flex; align-items: center; gap: 0.5rem; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); margin-top: 0.5rem; }
+  .project-link-row .arrow { transition: transform 0.2s; }
   .project-card:hover .arrow { transform: translateX(4px); }
 
-  /* thumb colors per card */
-  .thumb-code { background: linear-gradient(135deg, #1a1612 60%, #2e2925 100%); color: #8B6F47; }
-  .thumb-book { background: linear-gradient(135deg, #2a2420 0%, #3d3630 100%); color: #C8C1B5; }
-  .thumb-ppt  { background: linear-gradient(135deg, #1e1a17 0%, #2a2420 100%); color: #8B6F47; }
+  /* WRITING */
+  .writing { background: var(--ink); padding: 6rem 2rem; position: relative; overflow: hidden; }
+  .writing .section-label { color: var(--gold-light); }
+  .writing .section-title { color: var(--parchment-light); }
+  .writing .section-divider { background: var(--parchment-light); opacity: 0.15; }
+  .writing-deco { position: absolute; left: 5%; top: 50%; transform: translateY(-50%); opacity: 0.04; pointer-events: none; }
 
-  /* ── CONNECT (EXPO STYLE) ── */
-  .connect {
-    background: var(--ink);
-    padding: 6rem 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .writing-feature { max-width: 860px; margin: 4rem auto 0; display: grid; grid-template-columns: 1fr 1.6fr; gap: 4rem; align-items: start; }
+
+  .writing-book {
+    aspect-ratio: 2/3; overflow: hidden; position: relative;
   }
-  .connect-inner {
-    max-width: 1040px;
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
+  .writing-book img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .writing-book-fallback {
+    width: 100%; height: 100%;
+    background: linear-gradient(160deg, #2e2925 0%, #1a1612 100%);
+    border: 1px solid rgba(200,193,181,0.12);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 2.5rem 2rem; gap: 1.5rem; position: relative;
   }
-  .connect-heading {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 700;
-    line-height: 1.1;
-    color: var(--parchment-light);
-    letter-spacing: 0.01em;
+  .writing-book-fallback::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 6px; background: linear-gradient(180deg, var(--gold) 0%, var(--gold-light) 100%);
   }
+  .writing-book-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; font-style: italic; color: var(--parchment-light); text-align: center; line-height: 1.3; }
+  .writing-book-ornament { color: var(--gold); font-size: 1.4rem; letter-spacing: 0.3em; }
+  .writing-award-badge { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; border: 1px solid rgba(139,111,71,0.5); padding: 0.7rem 1.2rem; text-align: center; }
+  .badge-top { font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-light); }
+  .badge-award { font-family: 'Playfair Display', serif; font-size: 0.85rem; font-weight: 700; color: var(--gold-light); letter-spacing: 0.04em; }
+
+  .writing-content { display: flex; flex-direction: column; gap: 1.5rem; padding-top: 0.5rem; }
+  .writing-genre { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-light); }
+  .writing-piece-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 700; font-style: italic; color: var(--parchment-light); line-height: 1.1; }
+  .judges-note { font-family: 'EB Garamond', serif; font-size: 1.1rem; line-height: 1.8; color: rgba(245,242,236,0.7); border-left: 2px solid var(--gold); padding-left: 1.25rem; }
+  .judges-label { font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 0.5rem; display: block; }
+  .writing-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .writing-cta {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--parchment-light); text-decoration: none;
+    border-bottom: 1px solid var(--gold); padding-bottom: 0.3rem;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .writing-cta:hover { color: var(--gold-light); border-color: var(--gold-light); }
+  .writing-cta.secondary { color: rgba(245,242,236,0.5); border-color: rgba(139,111,71,0.3); }
+  .writing-cta.secondary:hover { color: var(--gold-light); border-color: var(--gold-light); }
+
+  /* CONNECT */
+  .connect { background: var(--ink); padding: 6rem 2rem; display: flex; align-items: center; justify-content: center; }
+  .connect-inner { max-width: 1040px; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .connect-heading { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 700; line-height: 1.1; color: var(--parchment-light); letter-spacing: 0.01em; }
   .connect-heading em { font-style: italic; color: var(--gold-light); }
-  .connect-links { display: flex; flex-direction: column; gap: 1px; }
-  .connect-link {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.4rem 0;
-    border-top: 1px solid rgba(200,193,181,0.18);
-    text-decoration: none;
-    transition: padding-left 0.2s;
-  }
+  .connect-links { display: flex; flex-direction: column; }
+  .connect-link { display: flex; align-items: center; justify-content: space-between; padding: 1.4rem 0; border-top: 1px solid rgba(200,193,181,0.18); text-decoration: none; transition: padding-left 0.2s; }
   .connect-link:last-child { border-bottom: 1px solid rgba(200,193,181,0.18); }
   .connect-link:hover { padding-left: 0.75rem; }
-  .connect-link-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
-    font-weight: 400;
-    color: var(--parchment-light);
-  }
-  .connect-link-handle {
-    font-size: 0.65rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--gold-light);
-  }
+  .connect-link-name { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 400; color: var(--parchment-light); }
+  .connect-link-handle { font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-light); }
 
-  /* ── FOOTER ── */
-  footer {
-    background: var(--ink);
-    border-top: 1px solid rgba(200,193,181,0.12);
-    padding: 2rem 3rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .footer-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.95rem;
-    color: var(--rule);
-    font-weight: 400;
-  }
-  .footer-copy {
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
-    color: rgba(200,193,181,0.4);
-  }
+  /* FOOTER */
+  footer { background: var(--ink); border-top: 1px solid rgba(200,193,181,0.12); padding: 2rem 3rem; display: flex; align-items: center; justify-content: space-between; }
+  .footer-name { font-family: 'Playfair Display', serif; font-size: 0.95rem; color: var(--rule); font-weight: 400; }
+  .footer-copy { font-size: 0.65rem; letter-spacing: 0.1em; color: rgba(200,193,181,0.4); }
 
-  /* ── RESPONSIVE ── */
+  /* RESPONSIVE */
   @media (max-width: 768px) {
     nav { padding: 1rem 1.5rem; }
     .nav-links { display: none; }
-    .hero-name { flex-direction: column; gap: 0; }
+    .hero-name { grid-template-columns: 1fr; justify-items: center; gap: 1rem; }
     .hero-first, .hero-last { text-align: center; padding: 0; }
-    .hero-portrait { width: 200px; margin: 1.5rem 0; }
+    .hero-portrait { width: 180px; }
     .projects-grid { grid-template-columns: 1fr; }
+    .writing-feature { grid-template-columns: 1fr; gap: 2.5rem; }
     .connect-inner { grid-template-columns: 1fr; gap: 2rem; }
     footer { flex-direction: column; gap: 0.75rem; text-align: center; }
   }
-
-  @media (prefers-reduced-motion: reduce) {
-    * { animation: none !important; transition: none !important; }
-  }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav id="nav">
   <a href="#" class="nav-logo">Bianca Bacchus</a>
   <ul class="nav-links">
@@ -557,7 +222,7 @@
     <span class="hero-first">Bianca</span>
 
     <div class="hero-portrait">
-      <img src="bianca.jpg" alt="Bianca Bacchus" style="width:100%;height:100%;object-fit:cover;object-position:top;">
+      <img src="bianca.jpg" alt="Bianca Bacchus">
     </div>
 
     <span class="hero-last">Bacchus</span>
@@ -569,8 +234,7 @@
     <div class="hero-rule"></div>
   </div>
 
-  <!-- decorative leaf SVG -->
-  <svg class="deco-leaf" width="280" height="380" viewBox="0 0 280 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg class="deco-leaf" width="280" height="380" viewBox="0 0 280 380" fill="none">
     <path d="M140 10 C200 80 260 180 140 370 C20 180 80 80 140 10Z" stroke="#1A1612" stroke-width="1.5" fill="none"/>
     <line x1="140" y1="10" x2="140" y2="370" stroke="#1A1612" stroke-width="0.8"/>
     <path d="M140 80 C170 100 200 130 190 160" stroke="#1A1612" stroke-width="0.6" fill="none"/>
@@ -616,49 +280,40 @@
 
   <div class="projects-grid">
 
-    <!-- Waldorf -->
     <a class="project-card" href="https://github.com/retinxl" target="_blank">
-      <div class="project-thumb thumb-code">
-        <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
-          <rect x="10" y="10" width="36" height="36" rx="2" stroke="currentColor" stroke-width="1.2"/>
-          <path d="M18 22l6 6-6 6M28 34h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-        </svg>
+      <div class="project-thumb">
+        <img src="waldorf.jpg" alt="Waldorf project">
       </div>
-      <span class="project-meta">C# &middot; .NET &middot; Open Source</span>
-      <h3 class="project-title">Waldorf</h3>
-      <p class="project-desc">A file system analysis tool that scans directory structures, generates storage and file-type reports, and identifies duplicate files using SHA-256 hashing.</p>
-      <div class="project-link-row">View on GitHub <span class="arrow">→</span></div>
+      <div class="project-card-body">
+        <span class="project-meta">C# &middot; .NET &middot; Open Source</span>
+        <h3 class="project-title">Waldorf</h3>
+        <p class="project-desc">A file system analysis tool that scans directory structures, generates storage and file-type reports, and identifies duplicate files using SHA-256 hashing.</p>
+        <div class="project-link-row">View on GitHub <span class="arrow">→</span></div>
+      </div>
     </a>
 
-    <!-- YouTube -->
     <a class="project-card" href="https://www.youtube.com/@bookishbianca" target="_blank">
-      <div class="project-thumb thumb-book">
-        <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
-          <rect x="8" y="14" width="26" height="32" rx="2" stroke="currentColor" stroke-width="1.2"/>
-          <path d="M34 18h8M34 26h8M34 34h5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-          <path d="M16 22h10M16 28h10M16 34h6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-        </svg>
+      <div class="project-thumb">
+        <img src="bookish.jpg" alt="Bookish Bianca YouTube channel">
       </div>
-      <span class="project-meta">YouTube &middot; Literary Review</span>
-      <h3 class="project-title">Bookish Bianca</h3>
-      <p class="project-desc">A YouTube channel dedicated to in-depth book discussions, reviews, and literary explorations across fiction, non-fiction, and everything between.</p>
-      <div class="project-link-row">Watch on YouTube <span class="arrow">→</span></div>
+      <div class="project-card-body">
+        <span class="project-meta">YouTube &middot; Literary Review</span>
+        <h3 class="project-title">Bookish Bianca</h3>
+        <p class="project-desc">A YouTube channel dedicated to in-depth book discussions, reviews, and literary explorations across fiction, non-fiction, and everything between.</p>
+        <div class="project-link-row">Watch on YouTube <span class="arrow">→</span></div>
+      </div>
     </a>
 
-    <!-- PowerPoints -->
     <a class="project-card" href="https://drive.google.com/drive/folders/1RoF_4uCg-u98TCPm28STCvubf00vDWID?usp=sharing" target="_blank">
-      <div class="project-thumb thumb-ppt">
-        <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
-          <rect x="8" y="10" width="40" height="28" rx="2" stroke="currentColor" stroke-width="1.2"/>
-          <path d="M20 38v8M36 38v8M14 46h28" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-          <rect x="16" y="18" width="10" height="12" rx="1" stroke="currentColor" stroke-width="1"/>
-          <path d="M30 20h10M30 26h7" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
-        </svg>
+      <div class="project-thumb">
+        <img src="slides.jpg" alt="Book analysis presentations">
       </div>
-      <span class="project-meta">Google Drive &middot; Analysis</span>
-      <h3 class="project-title">Book Analysis Decks</h3>
-      <p class="project-desc">Visual PowerPoint presentations that break down my current reads — covering themes, structure, character arcs, and literary devices in an accessible format.</p>
-      <div class="project-link-row">View Presentations <span class="arrow">→</span></div>
+      <div class="project-card-body">
+        <span class="project-meta">Google Drive &middot; Analysis</span>
+        <h3 class="project-title">Book Analysis Decks</h3>
+        <p class="project-desc">Visual PowerPoint presentations that break down my current reads — covering themes, structure, character arcs, and literary devices in an accessible format.</p>
+        <div class="project-link-row">View Presentations <span class="arrow">→</span></div>
+      </div>
     </a>
 
   </div>
@@ -666,7 +321,6 @@
 
 <!-- WRITING -->
 <section class="writing" id="writing">
-  <!-- decorative oversized letter -->
   <svg class="writing-deco" width="400" height="500" viewBox="0 0 400 500" fill="none">
     <text x="0" y="420" font-family="serif" font-size="480" font-style="italic" fill="white">P</text>
   </svg>
@@ -676,28 +330,36 @@
   <div class="section-divider"></div>
 
   <div class="writing-feature">
-    <!-- Book cover mockup -->
     <div class="writing-book">
-      <div class="writing-book-ornament">✦ ✦ ✦</div>
-      <div class="writing-book-title">Persephone<br>and I</div>
-      <div class="writing-book-ornament">—</div>
-      <div class="writing-award-badge">
-        <span class="badge-top">Winner</span>
-        <span class="badge-award">McKinney Award</span>
+      <img src="persephone.jpg" alt="Persephone and I" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="writing-book-fallback" style="display:none">
+        <div class="writing-book-ornament">✦ ✦ ✦</div>
+        <div class="writing-book-title">Persephone<br>and I</div>
+        <div class="writing-book-ornament">—</div>
+        <div class="writing-award-badge">
+          <span class="badge-top">Winner</span>
+          <span class="badge-award">McKinney Award</span>
+        </div>
       </div>
     </div>
 
-    <!-- Description -->
     <div class="writing-content">
       <span class="writing-genre">Short Fiction &nbsp;·&nbsp; Award-Winning</span>
       <h3 class="writing-piece-title">Persephone and I</h3>
-      <p class="writing-excerpt">
-        A McKinney Award–winning piece of fiction drawing on myth, identity, and the push and pull between worlds.
-        Add a line or two here about what inspired you or what the story is about — readers love a glimpse behind the page.
-      </p>
-      <a class="writing-cta" href="#" target="_blank">
-        Read the piece <span>→</span>
-      </a>
+      <div>
+        <span class="judges-label">Judges' Note — McKinney Award 2025</span>
+        <blockquote class="judges-note">
+          The language of "Persephone and I" is fresh and propulsive, imbuing the story of a typical night in the life of an adolescent boy with a sense of excitement and wonder. While the scenes are bustling and active with the energy of other young characters, the reader is made to identify closely with our protagonist — a young man who knows himself all too well but is still looking to find where he fits.
+        </blockquote>
+      </div>
+      <div class="writing-links">
+        <a class="writing-cta" href="https://docs.google.com/document/d/1Uma7RYM0jlDiYSSlD6IIv6aq7QWLzzysOVGqXYgpFrE/edit?usp=sharing" target="_blank">
+          Read the piece →
+        </a>
+        <a class="writing-cta secondary" href="https://hass.rpi.edu/mckinney-student-contest-winners-2025" target="_blank">
+          McKinney Award →
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -725,10 +387,9 @@
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <span class="footer-name">Bianca Bacchus</span>
-  <span class="footer-copy">© 2024 &nbsp;·&nbsp; All rights reserved</span>
+  <span class="footer-copy">© 2025 &nbsp;·&nbsp; All rights reserved</span>
 </footer>
 
 <script>
@@ -737,6 +398,5 @@
     nav.classList.toggle('scrolled', window.scrollY > 40);
   });
 </script>
-
 </body>
 </html>
