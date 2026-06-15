@@ -27,42 +27,53 @@
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
-    padding: 1.2rem 3rem;
+    padding: 1rem 3rem;
     background: var(--parchment);
     border-bottom: 1px solid transparent;
     transition: border-color 0.3s, background 0.3s;
   }
   nav.scrolled { border-color: var(--rule); background: rgba(232,227,217,0.97); backdrop-filter: blur(4px); }
-  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 400; letter-spacing: 0.04em; color: var(--ink); text-decoration: none; }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-  .nav-links a { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mid); text-decoration: none; transition: color 0.2s; }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 400; letter-spacing: 0.04em; color: var(--ink); text-decoration: none; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mid); text-decoration: none; transition: color 0.2s; }
   .nav-links a:hover { color: var(--gold); }
 
-  /* HERO */
+  /* HERO — compact, fits above fold */
   .hero {
-    position: relative; min-height: 100vh;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    overflow: hidden; padding: 7rem 2rem 5rem; background: var(--parchment);
+    position: relative;
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    align-items: center;
+    padding: 5rem 2rem 1.5rem;
+    background: var(--parchment);
+    overflow: hidden;
   }
 
-  /* KEY FIX: CSS grid with portrait in the middle column */
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
   .hero-name {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
     width: 100%;
-    max-width: 1100px;
+    max-width: 1000px;
   }
   .hero-first, .hero-last {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(2.8rem, 5.5vw, 6rem);
-    font-weight: 900; line-height: 0.95; letter-spacing: -0.02em; color: var(--ink); user-select: none;
+    font-size: clamp(2.5rem, 5vw, 5.5rem);
+    font-weight: 900; line-height: 1; letter-spacing: -0.02em; color: var(--ink); user-select: none;
   }
-  .hero-first { text-align: right; padding-right: 2rem; }
-  .hero-last  { text-align: left;  padding-left: 2rem; }
+  .hero-first { text-align: right; padding-right: 1.75rem; }
+  .hero-last  { text-align: left;  padding-left: 1.75rem; }
 
   .hero-portrait {
-    width: clamp(160px, 17vw, 250px);
+    width: clamp(130px, 14vw, 200px);
     aspect-ratio: 3/4;
     overflow: hidden;
     background: var(--ink-mid);
@@ -70,72 +81,93 @@
   }
   .hero-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
 
-  .hero-tagline { position: relative; z-index: 2; margin-top: 3rem; display: flex; align-items: center; gap: 2rem; }
-  .hero-rule { height: 1px; width: 60px; background: var(--gold); }
-  .hero-tagline-text { font-family: 'EB Garamond', serif; font-style: italic; font-size: 1.15rem; letter-spacing: 0.02em; color: var(--gold); }
+  .hero-tagline { display: flex; align-items: center; gap: 1.5rem; }
+  .hero-rule { height: 1px; width: 50px; background: var(--gold); }
+  .hero-tagline-text { font-family: 'EB Garamond', serif; font-style: italic; font-size: 1.05rem; letter-spacing: 0.02em; color: var(--gold); }
+
+  /* compact about strip — visible without scrolling */
+  .hero-about {
+    width: 100%;
+    max-width: 680px;
+    text-align: center;
+    padding: 0 1rem;
+  }
+  .hero-about p {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.1rem;
+    line-height: 1.65;
+    color: var(--ink-mid);
+  }
+  .hero-about-tags {
+    margin-top: 0.75rem;
+    display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;
+  }
+  .tag { font-size: 0.6rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; border: 1px solid var(--rule); padding: 0.3rem 0.8rem; color: var(--ink-mid); }
 
   .hero-scroll {
-    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
-    display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: var(--rule);
+    padding: 1rem 0 0.5rem;
+    display: flex; flex-direction: column; align-items: center; gap: 0.4rem; color: var(--rule);
     animation: bob 2.5s ease-in-out infinite;
   }
-  .hero-scroll span { font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; }
-  @keyframes bob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+  .hero-scroll span { font-size: 0.55rem; letter-spacing: 0.18em; text-transform: uppercase; }
+  @keyframes bob { 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(5px) } }
 
-  .deco-leaf { position: absolute; right: 8%; bottom: 20%; opacity: 0.07; pointer-events: none; }
+  .deco-leaf { position: absolute; right: 6%; top: 50%; transform: translateY(-50%); opacity: 0.06; pointer-events: none; }
 
   /* SECTION SHARED */
-  .section-label { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); text-align: center; display: block; margin-bottom: 0.75rem; }
-  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; text-align: center; color: var(--ink); letter-spacing: 0.01em; line-height: 1.15; }
-  .section-divider { width: 36px; height: 1px; background: var(--ink); margin: 1.5rem auto 0; opacity: 0.25; }
+  .section-label { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); text-align: center; display: block; margin-bottom: 0.6rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 700; text-align: center; color: var(--ink); letter-spacing: 0.01em; line-height: 1.15; }
+  .section-divider { width: 30px; height: 1px; background: var(--ink); margin: 1.25rem auto 0; opacity: 0.25; }
 
-  /* ABOUT */
-  .about { background: var(--parchment-light); padding: 6rem 2rem; }
-  .about-inner { max-width: 680px; margin: 0 auto; text-align: center; }
-  .about-bio { margin-top: 2.5rem; font-family: 'EB Garamond', serif; font-size: 1.3rem; line-height: 1.75; color: var(--ink-mid); }
-  .about-bio em { font-style: italic; color: var(--gold); }
-  .about-tags { margin-top: 2rem; display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
-  .tag { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; border: 1px solid var(--rule); padding: 0.4rem 1rem; color: var(--ink-mid); }
+  /* ABOUT (full) */
+  .about { background: var(--parchment-light); padding: 5rem 2rem; }
+  .about-inner { max-width: 700px; margin: 0 auto; }
+  .about-inner .section-title, .about-inner .section-label { text-align: left; }
+  .about-inner .section-divider { margin-left: 0; }
+  .about-grid { margin-top: 2.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+  .about-bio { font-family: 'EB Garamond', serif; font-size: 1.2rem; line-height: 1.8; color: var(--ink-mid); }
+  .about-bio p + p { margin-top: 1rem; }
+  .about-details { display: flex; flex-direction: column; gap: 1.25rem; }
+  .about-detail-label { font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 0.3rem; }
+  .about-detail-value { font-size: 0.85rem; color: var(--ink-mid); line-height: 1.5; }
+  @media (max-width: 680px) { .about-grid { grid-template-columns: 1fr; } }
 
   /* PROJECTS */
-  .projects { padding: 6rem 2rem; background: var(--parchment); }
+  .projects { padding: 5rem 2rem; background: var(--parchment); }
   .projects-grid {
-    max-width: 1040px; margin: 3.5rem auto 0;
-    display: grid; grid-template-columns: repeat(3, 1fr);
+    max-width: 1040px; margin: 3rem auto 0;
+    display: grid; grid-template-columns: repeat(4, 1fr);
     border-top: 1px solid var(--rule); border-left: 1px solid var(--rule);
   }
   .project-card {
     border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
-    padding: 0 0 2rem 0;
-    display: flex; flex-direction: column; gap: 0;
+    padding: 0 0 1.75rem 0;
+    display: flex; flex-direction: column;
     transition: background 0.2s; text-decoration: none; color: inherit;
   }
   .project-card:hover { background: var(--parchment-light); }
-  .project-thumb {
-    aspect-ratio: 16/9; overflow: hidden; width: 100%; margin-bottom: 1.5rem;
-  }
+  .project-thumb { aspect-ratio: 4/3; overflow: hidden; width: 100%; margin-bottom: 1.25rem; }
   .project-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
-  .project-card:hover .project-thumb img { transform: scale(1.04); }
-  .project-card-body { padding: 0 1.75rem; display: flex; flex-direction: column; gap: 0.75rem; flex: 1; }
-  .project-meta { font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); }
-  .project-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; line-height: 1.3; color: var(--ink); }
-  .project-desc { font-size: 0.8rem; line-height: 1.65; color: var(--ink-mid); flex: 1; }
-  .project-link-row { display: flex; align-items: center; gap: 0.5rem; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); margin-top: 0.5rem; }
+  .project-card:hover .project-thumb img { transform: scale(1.05); }
+  .project-card-body { padding: 0 1.25rem; display: flex; flex-direction: column; gap: 0.6rem; flex: 1; }
+  .project-meta { font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); }
+  .project-title { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; line-height: 1.3; color: var(--ink); }
+  .project-desc { font-size: 0.75rem; line-height: 1.6; color: var(--ink-mid); flex: 1; }
+  .project-link-row { display: flex; align-items: center; gap: 0.4rem; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); margin-top: 0.4rem; }
   .project-link-row .arrow { transition: transform 0.2s; }
   .project-card:hover .arrow { transform: translateX(4px); }
+  @media (max-width: 900px) { .projects-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 500px) { .projects-grid { grid-template-columns: 1fr; } }
 
   /* WRITING */
-  .writing { background: var(--ink); padding: 6rem 2rem; position: relative; overflow: hidden; }
+  .writing { background: var(--ink); padding: 5rem 2rem; position: relative; overflow: hidden; }
   .writing .section-label { color: var(--gold-light); }
   .writing .section-title { color: var(--parchment-light); }
   .writing .section-divider { background: var(--parchment-light); opacity: 0.15; }
-  .writing-deco { position: absolute; left: 5%; top: 50%; transform: translateY(-50%); opacity: 0.04; pointer-events: none; }
+  .writing-deco { position: absolute; left: 4%; top: 50%; transform: translateY(-50%); opacity: 0.04; pointer-events: none; }
 
-  .writing-feature { max-width: 860px; margin: 4rem auto 0; display: grid; grid-template-columns: 1fr 1.6fr; gap: 4rem; align-items: start; }
-
-  .writing-book {
-    aspect-ratio: 2/3; overflow: hidden; position: relative;
-  }
+  .writing-feature { max-width: 820px; margin: 3.5rem auto 0; display: grid; grid-template-columns: 1fr 1.6fr; gap: 3.5rem; align-items: start; }
+  .writing-book { aspect-ratio: 2/3; overflow: hidden; position: relative; }
   .writing-book img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .writing-book-fallback {
     width: 100%; height: 100%;
@@ -144,62 +176,56 @@
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     padding: 2.5rem 2rem; gap: 1.5rem; position: relative;
   }
-  .writing-book-fallback::before {
-    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
-    width: 6px; background: linear-gradient(180deg, var(--gold) 0%, var(--gold-light) 100%);
-  }
+  .writing-book-fallback::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: linear-gradient(180deg, var(--gold) 0%, var(--gold-light) 100%); }
   .writing-book-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; font-style: italic; color: var(--parchment-light); text-align: center; line-height: 1.3; }
-  .writing-book-ornament { color: var(--gold); font-size: 1.4rem; letter-spacing: 0.3em; }
-  .writing-award-badge { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; border: 1px solid rgba(139,111,71,0.5); padding: 0.7rem 1.2rem; text-align: center; }
-  .badge-top { font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-light); }
-  .badge-award { font-family: 'Playfair Display', serif; font-size: 0.85rem; font-weight: 700; color: var(--gold-light); letter-spacing: 0.04em; }
+  .writing-book-ornament { color: var(--gold); font-size: 1.2rem; letter-spacing: 0.3em; }
+  .writing-award-badge { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; border: 1px solid rgba(139,111,71,0.5); padding: 0.6rem 1rem; text-align: center; }
+  .badge-top { font-size: 0.52rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-light); }
+  .badge-award { font-family: 'Playfair Display', serif; font-size: 0.8rem; font-weight: 700; color: var(--gold-light); letter-spacing: 0.04em; }
 
-  .writing-content { display: flex; flex-direction: column; gap: 1.5rem; padding-top: 0.5rem; }
-  .writing-genre { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-light); }
-  .writing-piece-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 700; font-style: italic; color: var(--parchment-light); line-height: 1.1; }
-  .judges-note { font-family: 'EB Garamond', serif; font-size: 1.1rem; line-height: 1.8; color: rgba(245,242,236,0.7); border-left: 2px solid var(--gold); padding-left: 1.25rem; }
-  .judges-label { font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 0.5rem; display: block; }
+  .writing-content { display: flex; flex-direction: column; gap: 1.25rem; padding-top: 0.5rem; }
+  .writing-genre { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-light); }
+  .writing-piece-title { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 700; font-style: italic; color: var(--parchment-light); line-height: 1.1; }
+  .judges-note { font-family: 'EB Garamond', serif; font-size: 1.05rem; line-height: 1.8; color: rgba(245,242,236,0.7); border-left: 2px solid var(--gold); padding-left: 1.1rem; }
+  .judges-label { font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 0.4rem; display: block; }
   .writing-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-  .writing-cta {
-    display: inline-flex; align-items: center; gap: 0.6rem;
-    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--parchment-light); text-decoration: none;
-    border-bottom: 1px solid var(--gold); padding-bottom: 0.3rem;
-    transition: color 0.2s, border-color 0.2s;
-  }
+  .writing-cta { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--parchment-light); text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: 0.3rem; transition: color 0.2s, border-color 0.2s; }
   .writing-cta:hover { color: var(--gold-light); border-color: var(--gold-light); }
   .writing-cta.secondary { color: rgba(245,242,236,0.5); border-color: rgba(139,111,71,0.3); }
   .writing-cta.secondary:hover { color: var(--gold-light); border-color: var(--gold-light); }
+  @media (max-width: 680px) { .writing-feature { grid-template-columns: 1fr; gap: 2rem; } }
+
+  /* RESUME */
+  .resume { background: var(--parchment-light); padding: 5rem 2rem; }
+  .resume-inner { max-width: 820px; margin: 3rem auto 0; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+  .resume-preview { overflow: hidden; border: 1px solid var(--rule); }
+  .resume-preview img { width: 100%; display: block; transition: transform 0.4s; }
+  .resume-preview:hover img { transform: scale(1.02); }
+  .resume-content { display: flex; flex-direction: column; gap: 1.25rem; }
+  .resume-headline { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; line-height: 1.2; color: var(--ink); }
+  .resume-desc { font-family: 'EB Garamond', serif; font-size: 1.1rem; line-height: 1.7; color: var(--ink-mid); }
+  .resume-cta { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: 0.3rem; width: fit-content; transition: color 0.2s; }
+  .resume-cta:hover { color: var(--gold); }
+  @media (max-width: 680px) { .resume-inner { grid-template-columns: 1fr; } }
 
   /* CONNECT */
-  .connect { background: var(--ink); padding: 6rem 2rem; display: flex; align-items: center; justify-content: center; }
+  .connect { background: var(--ink); padding: 5rem 2rem; display: flex; align-items: center; justify-content: center; }
   .connect-inner { max-width: 1040px; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-  .connect-heading { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 700; line-height: 1.1; color: var(--parchment-light); letter-spacing: 0.01em; }
+  .connect-heading { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 700; line-height: 1.1; color: var(--parchment-light); }
   .connect-heading em { font-style: italic; color: var(--gold-light); }
   .connect-links { display: flex; flex-direction: column; }
-  .connect-link { display: flex; align-items: center; justify-content: space-between; padding: 1.4rem 0; border-top: 1px solid rgba(200,193,181,0.18); text-decoration: none; transition: padding-left 0.2s; }
+  .connect-link { display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 0; border-top: 1px solid rgba(200,193,181,0.18); text-decoration: none; transition: padding-left 0.2s; }
   .connect-link:last-child { border-bottom: 1px solid rgba(200,193,181,0.18); }
   .connect-link:hover { padding-left: 0.75rem; }
-  .connect-link-name { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 400; color: var(--parchment-light); }
-  .connect-link-handle { font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-light); }
+  .connect-link-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 400; color: var(--parchment-light); }
+  .connect-link-handle { font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-light); }
+  @media (max-width: 680px) { .connect-inner { grid-template-columns: 1fr; gap: 2rem; } }
 
   /* FOOTER */
-  footer { background: var(--ink); border-top: 1px solid rgba(200,193,181,0.12); padding: 2rem 3rem; display: flex; align-items: center; justify-content: space-between; }
-  .footer-name { font-family: 'Playfair Display', serif; font-size: 0.95rem; color: var(--rule); font-weight: 400; }
-  .footer-copy { font-size: 0.65rem; letter-spacing: 0.1em; color: rgba(200,193,181,0.4); }
-
-  /* RESPONSIVE */
-  @media (max-width: 768px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { display: none; }
-    .hero-name { grid-template-columns: 1fr; justify-items: center; gap: 1rem; }
-    .hero-first, .hero-last { text-align: center; padding: 0; }
-    .hero-portrait { width: 180px; }
-    .projects-grid { grid-template-columns: 1fr; }
-    .writing-feature { grid-template-columns: 1fr; gap: 2.5rem; }
-    .connect-inner { grid-template-columns: 1fr; gap: 2rem; }
-    footer { flex-direction: column; gap: 0.75rem; text-align: center; }
-  }
+  footer { background: var(--ink); border-top: 1px solid rgba(200,193,181,0.12); padding: 1.75rem 3rem; display: flex; align-items: center; justify-content: space-between; }
+  .footer-name { font-family: 'Playfair Display', serif; font-size: 0.9rem; color: var(--rule); font-weight: 400; }
+  .footer-copy { font-size: 0.62rem; letter-spacing: 0.1em; color: rgba(200,193,181,0.4); }
+  @media (max-width: 500px) { nav { padding: 1rem 1.5rem; } .nav-links { display: none; } footer { flex-direction: column; gap: 0.75rem; text-align: center; } }
   @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 </style>
 </head>
@@ -211,6 +237,7 @@
     <li><a href="#about">About</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#writing">Writing</a></li>
+    <li><a href="#resume">Resume</a></li>
     <li><a href="#connect">Connect</a></li>
     <li><a href="https://github.com/retinxl" target="_blank">GitHub</a></li>
   </ul>
@@ -218,56 +245,77 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-name">
-    <span class="hero-first">Bianca</span>
-
-    <div class="hero-portrait">
-      <img src="bianca.jpg" alt="Bianca Bacchus">
+  <div class="hero-content">
+    <div class="hero-name">
+      <span class="hero-first">Bianca</span>
+      <div class="hero-portrait">
+        <img src="bianca.jpg" alt="Bianca Bacchus">
+      </div>
+      <span class="hero-last">Bacchus</span>
     </div>
 
-    <span class="hero-last">Bacchus</span>
+    <div class="hero-tagline">
+      <div class="hero-rule"></div>
+      <span class="hero-tagline-text">Software Engineer · Books · RPI CS '25</span>
+      <div class="hero-rule"></div>
+    </div>
+
+    <div class="hero-about">
+      <p>I'm a CS grad from RPI with a background in Java, Python, and C#, and a minor in Literature and Creative Writing. I build tools, teach code, and write fiction — sometimes all in the same week.</p>
+      <div class="hero-about-tags">
+        <span class="tag">Java · Python · C#</span>
+        <span class="tag">AI &amp; ML</span>
+        <span class="tag">Book Reviews</span>
+        <span class="tag">Fiction Writer</span>
+      </div>
+    </div>
   </div>
 
-  <div class="hero-tagline">
-    <div class="hero-rule"></div>
-    <span class="hero-tagline-text">Books · Code · Creative Projects</span>
-    <div class="hero-rule"></div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <svg width="11" height="18" viewBox="0 0 12 20" fill="none"><path d="M6 1v18M1 13l5 5 5-5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
   </div>
 
-  <svg class="deco-leaf" width="280" height="380" viewBox="0 0 280 380" fill="none">
+  <svg class="deco-leaf" width="240" height="320" viewBox="0 0 280 380" fill="none">
     <path d="M140 10 C200 80 260 180 140 370 C20 180 80 80 140 10Z" stroke="#1A1612" stroke-width="1.5" fill="none"/>
     <line x1="140" y1="10" x2="140" y2="370" stroke="#1A1612" stroke-width="0.8"/>
     <path d="M140 80 C170 100 200 130 190 160" stroke="#1A1612" stroke-width="0.6" fill="none"/>
     <path d="M140 80 C110 100 80 130 90 160" stroke="#1A1612" stroke-width="0.6" fill="none"/>
     <path d="M140 140 C175 160 210 200 200 240" stroke="#1A1612" stroke-width="0.6" fill="none"/>
     <path d="M140 140 C105 160 70 200 80 240" stroke="#1A1612" stroke-width="0.6" fill="none"/>
-    <path d="M140 210 C168 230 185 265 175 300" stroke="#1A1612" stroke-width="0.6" fill="none"/>
-    <path d="M140 210 C112 230 95 265 105 300" stroke="#1A1612" stroke-width="0.6" fill="none"/>
   </svg>
-
-  <div class="hero-scroll">
-    <span>Scroll</span>
-    <svg width="12" height="20" viewBox="0 0 12 20" fill="none"><path d="M6 1v18M1 13l5 5 5-5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-  </div>
 </section>
 
 <!-- ABOUT -->
 <section class="about" id="about">
   <div class="about-inner">
-    <span class="section-label">Who I Am</span>
-    <h2 class="section-title">Developer &amp; Bibliophile</h2>
+    <span class="section-label">Background</span>
+    <h2 class="section-title">About Me</h2>
     <div class="section-divider"></div>
-    <p class="about-bio">
-      I'm a software developer with a love for <em>books, analysis, and building tools</em> that make ideas tangible.
-      Whether I'm parsing a directory tree in C# or dissecting a novel's narrative structure on YouTube,
-      I'm always looking for the patterns underneath the surface.
-    </p>
-    <div class="about-tags">
-      <span class="tag">C# / .NET</span>
-      <span class="tag">Book Reviews</span>
-      <span class="tag">Literary Analysis</span>
-      <span class="tag">Open Source</span>
-      <span class="tag">YouTube Creator</span>
+    <div class="about-grid">
+      <div class="about-bio">
+        <p>I graduated from RPI in May 2025 with a degree in Computer Science, specializing in AI and Machine Learning, and a minor in Literature and Creative Writing — which pretty much sums up how my brain works.</p>
+        <p>I've taught coding to everyone from kindergarteners to college students, built automation tools that cut manual work by 40%, and written fiction that won an award. Right now I'm a coding instructor and library assistant at Friends Academy, and always working on something on the side.</p>
+        <p>I'm most at home in Java, Python, and C#, but I pick up whatever the project needs.</p>
+      </div>
+      <div class="about-details">
+        <div>
+          <span class="about-detail-label">Education</span>
+          <span class="about-detail-value">B.S. Computer Science<br>AI &amp; ML Specialization<br>RPI, 2025</span>
+        </div>
+        <div>
+          <span class="about-detail-label">Minor</span>
+          <span class="about-detail-value">Literature &amp; Creative Writing</span>
+        </div>
+        <div>
+          <span class="about-detail-label">Languages</span>
+          <span class="about-detail-value">Java, Python, C#, C, C++, JavaScript, HTML/CSS, MATLAB</span>
+        </div>
+        <div>
+          <span class="about-detail-label">Based in</span>
+          <span class="about-detail-value">Bay Shore, NY</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -275,44 +323,48 @@
 <!-- PROJECTS -->
 <section class="projects" id="projects">
   <span class="section-label">Selected Work</span>
-  <h2 class="section-title">Projects &amp; Pursuits</h2>
+  <h2 class="section-title">Projects</h2>
   <div class="section-divider"></div>
 
   <div class="projects-grid">
 
     <a class="project-card" href="https://github.com/retinxl" target="_blank">
-      <div class="project-thumb">
-        <img src="waldorf.jpg" alt="Waldorf project">
-      </div>
+      <div class="project-thumb"><img src="waldorf.jpg" alt="Waldorf"></div>
       <div class="project-card-body">
-        <span class="project-meta">C# &middot; .NET &middot; Open Source</span>
+        <span class="project-meta">C# · .NET · Open Source</span>
         <h3 class="project-title">Waldorf</h3>
-        <p class="project-desc">A file system analysis tool that scans directory structures, generates storage and file-type reports, and identifies duplicate files using SHA-256 hashing.</p>
-        <div class="project-link-row">View on GitHub <span class="arrow">→</span></div>
+        <p class="project-desc">A CLI filesystem analyzer that crawls directory structures, generates storage and file-type reports, and detects duplicate files with SHA-256 hashing.</p>
+        <div class="project-link-row">GitHub <span class="arrow">→</span></div>
+      </div>
+    </a>
+
+    <a class="project-card" href="https://github.com/retinxl/Palindrome" target="_blank">
+      <div class="project-thumb"><img src="palindrome.jpg" alt="Palindrome Checker"></div>
+      <div class="project-card-body">
+        <span class="project-meta">Python · GitHub</span>
+        <h3 class="project-title">Palindrome Checker</h3>
+        <p class="project-desc">A clean Python tool that checks whether a given string is a palindrome, handling edge cases like casing and punctuation.</p>
+        <div class="project-link-row">GitHub <span class="arrow">→</span></div>
       </div>
     </a>
 
     <a class="project-card" href="https://www.youtube.com/@bookishbianca" target="_blank">
-      <div class="project-thumb">
-        <img src="bookish.jpg" alt="Bookish Bianca YouTube channel">
-      </div>
+      <div class="project-thumb"><img src="bookish.jpg" alt="Bookish Bianca"></div>
       <div class="project-card-body">
-        <span class="project-meta">YouTube &middot; Literary Review</span>
+        <span class="project-meta">YouTube · Literary Review</span>
         <h3 class="project-title">Bookish Bianca</h3>
-        <p class="project-desc">A YouTube channel dedicated to in-depth book discussions, reviews, and literary explorations across fiction, non-fiction, and everything between.</p>
-        <div class="project-link-row">Watch on YouTube <span class="arrow">→</span></div>
+        <p class="project-desc">A YouTube channel where I discuss and review the books I'm reading — fiction, non-fiction, whatever I'm into that month.</p>
+        <div class="project-link-row">YouTube <span class="arrow">→</span></div>
       </div>
     </a>
 
     <a class="project-card" href="https://drive.google.com/drive/folders/1RoF_4uCg-u98TCPm28STCvubf00vDWID?usp=sharing" target="_blank">
-      <div class="project-thumb">
-        <img src="slides.jpg" alt="Book analysis presentations">
-      </div>
+      <div class="project-thumb"><img src="slides.jpg" alt="Book Analysis Decks"></div>
       <div class="project-card-body">
-        <span class="project-meta">Google Drive &middot; Analysis</span>
+        <span class="project-meta">Google Drive · Analysis</span>
         <h3 class="project-title">Book Analysis Decks</h3>
-        <p class="project-desc">Visual PowerPoint presentations that break down my current reads — covering themes, structure, character arcs, and literary devices in an accessible format.</p>
-        <div class="project-link-row">View Presentations <span class="arrow">→</span></div>
+        <p class="project-desc">PowerPoint presentations breaking down books I've read — themes, structure, character arcs, and literary devices.</p>
+        <div class="project-link-row">View Slides <span class="arrow">→</span></div>
       </div>
     </a>
 
@@ -353,13 +405,26 @@
         </blockquote>
       </div>
       <div class="writing-links">
-        <a class="writing-cta" href="https://docs.google.com/document/d/1Uma7RYM0jlDiYSSlD6IIv6aq7QWLzzysOVGqXYgpFrE/edit?usp=sharing" target="_blank">
-          Read the piece →
-        </a>
-        <a class="writing-cta secondary" href="https://hass.rpi.edu/mckinney-student-contest-winners-2025" target="_blank">
-          McKinney Award →
-        </a>
+        <a class="writing-cta" href="https://docs.google.com/document/d/1Uma7RYM0jlDiYSSlD6IIv6aq7QWLzzysOVGqXYgpFrE/edit?usp=sharing" target="_blank">Read the piece →</a>
+        <a class="writing-cta secondary" href="https://hass.rpi.edu/mckinney-student-contest-winners-2025" target="_blank">McKinney Award →</a>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESUME -->
+<section class="resume" id="resume">
+  <span class="section-label">Experience</span>
+  <h2 class="section-title">Résumé</h2>
+  <div class="section-divider"></div>
+  <div class="resume-inner">
+    <a class="resume-preview" href="Bacchus_Bianca_Resume_SWE.pdf" target="_blank">
+      <img src="resume.jpg" alt="Bianca Bacchus Resume">
+    </a>
+    <div class="resume-content">
+      <h3 class="resume-headline">Software Engineer,<br>Instructor &amp; Builder</h3>
+      <p class="resume-desc">I've taught code to K–2 kids and college students, automated workflows in Python, built Excel dashboards, and interned at Girls Who Code. Full details in the PDF.</p>
+      <a class="resume-cta" href="Bacchus_Bianca_Resume_SWE.pdf" target="_blank">Download PDF →</a>
     </div>
   </div>
 </section>
@@ -367,10 +432,12 @@
 <!-- CONNECT -->
 <section class="connect" id="connect">
   <div class="connect-inner">
-    <div>
-      <h2 class="connect-heading">Let's be<br><em>in touch.</em></h2>
-    </div>
+    <h2 class="connect-heading">Let's be<br><em>in touch.</em></h2>
     <div class="connect-links">
+      <a class="connect-link" href="mailto:bbacchus007@gmail.com">
+        <span class="connect-link-name">Email</span>
+        <span class="connect-link-handle">bbacchus007@gmail.com →</span>
+      </a>
       <a class="connect-link" href="https://www.linkedin.com/in/bianca-bacchus/" target="_blank">
         <span class="connect-link-name">LinkedIn</span>
         <span class="connect-link-handle">bianca-bacchus →</span>
